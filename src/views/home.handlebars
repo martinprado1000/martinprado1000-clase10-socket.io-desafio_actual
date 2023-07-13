@@ -1,0 +1,16 @@
+<h2>{{nombre}}</h2>
+
+{{#if isAdmin}}
+  {{#each persona}} <!-- Si persona existe recorro el arreglo-->
+    <div>
+      <p>{{this.nombre}}</p>
+      <!-- En handlebars el this hace referencia al objeto que estamos recorriendo (persona en este caso)-->
+      <p>{{this.edad}}</p>
+    </div>
+  {{/each}}
+{{else}}
+  <p>Este usuario no es administrador</p>
+{{/if}}
+
+<script src="/socket.io/socket.io.js"></script>   <!-- LLamamos a io para ejecutarlo aca en el frontend -->
+<script src="/js/websockets.js"></script>   <!-- Aca le puedo pasar nuestro js publico que es donde tenemos configurado nuestro server io -->
