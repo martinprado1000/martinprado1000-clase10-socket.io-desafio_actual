@@ -2,8 +2,13 @@ const express = require("express");
 const app = express();
 const productsRoutes = require ("./routes/productsRoutes.js")
 const cartsRoutes = require ("./routes/cartsRoutes.js")
+const viewRoutes = require ("./routes/viewRoutes.js")
 const { Server } = require("socket.io") //  npm i socket.io  1-Requerimos socket.io, requerimos Server destructurado.
+const handlebars = require("express-handlebars");
 
+app.engine("handlebars", handlebars.engine());
+app.set("views", "./views");
+app.set("view engine", "handlebars");
 
 //---- Middleware ----
 app.use(express.json()); // Para que espress entienda las extensiones json.
@@ -20,6 +25,7 @@ io.on("connection",(socket)=>{
   console.log("Nuevo cliente conectado")
 })
 
+app.use("/",viewRoutes);
 app.use("/",productsRoutes);
 app.use("/",cartsRoutes);
 

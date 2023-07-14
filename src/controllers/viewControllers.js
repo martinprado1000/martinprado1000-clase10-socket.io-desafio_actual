@@ -4,15 +4,65 @@ const { ProductManager } = require("../managers/productManager");
 const manager = new ProductManager("db/products.json");
 
 //get Products
+const home = async (req, res) => {
+  try {
+    const limitInt = parseInt(req.query.limit);
+    const data = await manager.getProducts();
+    if (!limitInt) {
+      //res.json(data);
+      console.log(data)
+      res.render("home.handlebars",{data})
+    } else {
+      const dataLimit = data.slice(0, limitInt);
+      //res.json(dataLimit);
+      res.render("home.handlebars",dataLimit)
+    }
+  } catch (e) {
+    console.log(e);
+    return { "Error" : "Algo salio mal con la consulta"}
+  }
+}
+
+const realTimeProducts = async (req, res) => {
+  try{
+    //const product = req.body;
+    //const data = await manager.addProduct(product);
+    //res.status(data.status).render("realTimeProducts.handlebars",data.respuesta);
+    res.render("realTimeProducts.handlebars");
+  } catch(e) {
+    console.log(e);
+    return { "Error" : "Algo salio mal con la consulta"}
+  }
+}
+
+const postRealTimeProducts = async (req, res) => {
+  try{
+    const product = req.body;
+    console.log(product)
+    //const data = await manager.addProduct(product);
+    //console.log(data)
+    //res.status(data.status).render("realTimeProducts.handlebars",data.respuesta);
+    res.send("hola");
+  } catch(e) {
+    console.log(e);
+    return { "Error" : "Algo salio mal con la consulta"}
+  }
+}
+
+//-----------------------------------------------------------------------------------------
+//get Products
 const products = async (req, res) => {
   try {
     const limitInt = parseInt(req.query.limit);
     //console.log(limitInt);
     const data = await manager.getProducts();
-    if (!limitInt) res.json(data);
+    if (!limitInt) 
+      //res.json(data);
+      res.render("home.handlebars",data)
     else {
       const dataLimit = data.slice(0, limitInt);
-      res.json(dataLimit);
+      //res.json(dataLimit);
+      res.render("home.handlebars",dataLimit)
     }
   } catch (e) {
     console.log(e);
@@ -69,4 +119,4 @@ const productDelete = async (req, res) => {
   }
 }
 
-module.exports = { products, productId, productAdd, productDelete, productPut }
+module.exports = { home, realTimeProducts, postRealTimeProducts, products, productId, productAdd, productDelete, productPut }

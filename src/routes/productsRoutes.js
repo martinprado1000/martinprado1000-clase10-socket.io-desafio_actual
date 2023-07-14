@@ -3,6 +3,8 @@ const { products, productId, productAdd, productPut, productDelete } = require (
 
 const router = Router();
 
+
+
 router.get("/products", products);
 
 router.get("/products/:pid", productId);

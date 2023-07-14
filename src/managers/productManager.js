@@ -68,24 +68,26 @@ class ProductManager {
     
   async addProduct({ title, description, price, thumbnail, code, stock, category }) {
     try { // thumbnail NO es un campo obligatorio
-      if (!title || !description || !price || !code || !stock || !category ) {
-        return {"status":400 , "respuesta": "Campos incompletos"}
-      }
-      const produ = await this.getProducts();
-      const newProduct = {
-        id: produ.length + 1,
-        title,
-        description,
-        price,
-        thumbnail : thumbnail || [],
-        code,
-        stock,
-        category,
-      };
-      produ.push(newProduct);
-      await fs.promises.writeFile(this.path, JSON.stringify(produ, null, 2));
-      console.log("Producto agregado correctamente")
-      return {"status":201,"respuesta":"Producto agregado correctamente"}
+      // if (!title || !description || !price || !code || !stock || !category ) {
+      //   return {"status":400 , "respuesta": "Campos incompletos"}
+      // }
+      //console.log(title)
+      // const produ = await this.getProducts();
+      // const newProduct = {
+      //   id: produ.length + 1,
+      //   title,
+      //   description,
+      //   price,
+      //   thumbnail : thumbnail || [],
+      //   code,
+      //   stock,
+      //   category,
+      // };
+      // produ.push(newProduct);
+      // io.emit("nuevoProducto", JSON.stringify(newProduct)) // Ejecuto socket.io para pasarle al front el nuevo producto. Recordar que esto siempre envia string por eso usamos el JSON.stryngify
+      // await fs.promises.writeFile(this.path, JSON.stringify(produ, null, 2));
+      // console.log("Producto agregado correctamente")
+      // return {"status":201,"respuesta":"Producto agregado correctamente"}
     } catch (e) {
       console.log("Erro al agregar el producto");
       return {"status":500,"respuesta": "Erro al agregar el producto"}
