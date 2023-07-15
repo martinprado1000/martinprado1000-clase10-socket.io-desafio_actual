@@ -4,8 +4,8 @@ const fs = require("fs");
     constructor(path,io) {
       this.path = path;
       this.io = io;
-      console.log(path)
-      console.log(io)
+      //console.log(path)
+      //console.log(io)
       const ex = async () => {
         try {
           await fs.promises.access(this.path);
@@ -91,12 +91,13 @@ const fs = require("fs");
       stock,
       category,
     }) {
-      try {
-        // thumbnail NO es un campo obligatorio
-        // if (!title || !description || !price || !code || !stock || !category ) {
-        //   return {"status":400 , "respuesta": "Campos incompletos"}
-        // }
-        // console.log(title)
+      try { // thumbnail NO es un campo obligatorio
+        if (!title || !description || !price || !code || !stock || !category ) {
+          console.log("Campos incompletos");
+          return {"status":400 , "respuesta": "Campos incompletos"}
+        }
+        console.log(title)
+        console.log(description)
         const produ = await this.getProducts();
         const newProduct = {
           id: produ.length + 1,
@@ -110,7 +111,7 @@ const fs = require("fs");
         };
         //console.log(newProduct)
         produ.push(newProduct);
-        //io.emit("nuevoProducto", JSON.stringify(newProduct)) // Ejecuto io.emit para pasarle al front el nuevo producto. Recordar que esto siempre envia string por eso usamos el JSON.stryngify
+        this.io.emit("nuevoProducto", JSON.stringify(newProduct)) // Ejecuto io.emit para pasarle al front el nuevo producto. Recordar que esto siempre envia string por eso usamos el JSON.stryngify
         await fs.promises.writeFile(this.path, JSON.stringify(produ, null, 2));
         console.log("Producto agregado correctamente");
         return { status: 201, respuesta: "Producto agregado correctamente" };
