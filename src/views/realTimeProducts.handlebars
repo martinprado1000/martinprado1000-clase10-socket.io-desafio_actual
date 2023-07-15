@@ -1,10 +1,18 @@
 <div class="container">
   <h3>Vista real time products</h3>
-  <hr>
-  <form class="row g-3 needs-validation" novalidate action="/realTimeProducts" method="POST" enctype="multipart/form-data">
+  <hr />
+  <form
+    name="formProducts"
+    id="formProducts"
+    class="row g-3 needs-validation"
+    novalidate
+    method="POST"
+    action="/realTimeProducts"
+  >
     <div class="col-md-3">
-      <label for="title" class="form-label" name="title">Título del producto</label>
+      <label for="title" class="form-label">Título del producto</label>
       <input
+        name="title"
         type="text"
         class="form-control"
         id="title"
@@ -16,8 +24,9 @@
       </div>
     </div>
     <div class="col-md-6">
-      <label for="description" class="form-label" name="description">Descripción</label>
+      <label for="description" class="form-label">Descripción</label>
       <input
+        name="description"
         type="text-area"
         class="form-control"
         id="description"
@@ -29,8 +38,9 @@
       </div>
     </div>
     <div class="col-md-3">
-      <label for="price" class="form-label" name="price">Precio</label>
+      <label for="price" class="form-label">Precio</label>
       <input
+        name="price"
         type="text-area"
         class="form-control"
         id="price"
@@ -42,8 +52,9 @@
       </div>
     </div>
     <div class="col-md-4">
-      <label for="code" class="form-label" name="code">Codigo</label>
+      <label for="code" class="form-label">Codigo</label>
       <input
+        name="code"
         type="text"
         class="form-control"
         id="code"
@@ -55,8 +66,9 @@
       </div>
     </div>
     <div class="col-md-4">
-      <label for="category" class="form-label" name="category">Categoria</label>
+      <label for="category" class="form-label">Categoria</label>
       <input
+        name="category"
         type="text"
         class="form-control"
         id="category"
@@ -68,8 +80,9 @@
       </div>
     </div>
     <div class="col-md-4">
-      <label for="stock" class="form-label" name="stock">Cantidad</label>
+      <label for="stock" class="form-label">Cantidad</label>
       <input
+        name="stock"
         type="text"
         class="form-control"
         id="stock"
@@ -81,8 +94,9 @@
       </div>
     </div>
     <div class="col-md-12">
-      <label for="thumbnail" class="form-label" name="thumbnail">Imagenes</label>
+      <label for="thumbnail" class="form-label">Imagenes</label>
       <input
+        name="thumbnail"
         type="text"
         class="form-control"
         id="thumbnail"
@@ -93,7 +107,7 @@
         Please provide a valid zip.
       </div>
     </div>
-    {{!-- <div class="col-12">
+    {{! <div class="col-12">
       <div class="form-check">
         <input
           class="form-check-input"
@@ -109,7 +123,7 @@
           You must agree before submitting.
         </div>
       </div>
-    </div> --}}
+    </div> }}
     <div class="col-12">
       <button class="btn btn-primary" type="submit">Enviar</button>
     </div>

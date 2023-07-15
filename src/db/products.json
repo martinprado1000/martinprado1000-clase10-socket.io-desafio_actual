@@ -49,74 +49,42 @@
   },
   {
     "id": 5,
-    "title": "oooooo",
-    "description": "Desc prodzz",
-    "price": 123123,
-    "thumbnail": [
-      "www.image8.com"
-    ],
+    "title": "Producto 1022222222222222",
+    "description": "Desc prod10",
+    "price": 10101010101,
+    "thumbnail": [],
     "code": "abc101010",
     "stock": 10101010,
-    "category": "monitor"
+    "category": "celular"
   },
   {
     "id": 6,
-    "title": "oooooo",
-    "description": "Desc prodzz",
-    "price": 123123,
-    "thumbnail": [
-      "www.image8.com"
-    ],
-    "code": "abc101010",
-    "stock": 10101010,
-    "category": "monitor"
+    "title": "asd",
+    "description": "",
+    "price": "",
+    "thumbnail": [],
+    "code": "",
+    "stock": "",
+    "category": ""
   },
   {
     "id": 7,
-    "title": "oooooo",
-    "description": "Desc prodzz",
-    "price": 123123,
-    "thumbnail": [
-      "www.image8.com"
-    ],
+    "title": "Producto 1022222222222222",
+    "description": "Desc prod10",
+    "price": 10101010101,
+    "thumbnail": [],
     "code": "abc101010",
     "stock": 10101010,
-    "category": "monitor"
+    "category": "celular"
   },
   {
     "id": 8,
-    "title": "oooooo",
-    "description": "Desc prodzz",
-    "price": 123123,
-    "thumbnail": [
-      "www.image8.com"
-    ],
-    "code": "abc101010",
-    "stock": 10101010,
-    "category": "monitor"
-  },
-  {
-    "id": 9,
-    "title": "oooooeeeeeeeeeeeeeeeeeo",
-    "description": "Desc prodzz",
-    "price": 123123,
-    "thumbnail": [
-      "www.image8.com"
-    ],
-    "code": "abc101010",
-    "stock": 10101010,
-    "category": "monitor"
-  },
-  {
-    "id": 10,
-    "title": "oooooeeeeeeeeeeeeeeeeeo",
-    "description": "Desc prodzz",
-    "price": 123123,
-    "thumbnail": [
-      "www.image8.com"
-    ],
-    "code": "abc101010",
-    "stock": 10101010,
-    "category": "monitor"
+    "title": "asd",
+    "description": "",
+    "price": "",
+    "thumbnail": [],
+    "code": "",
+    "stock": "",
+    "category": ""
   }
 ]
