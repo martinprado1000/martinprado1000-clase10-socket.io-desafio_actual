@@ -92,12 +92,10 @@ const fs = require("fs");
       category,
     }) {
       try { // thumbnail NO es un campo obligatorio
-        if (!title || !description || !price || !code || !stock || !category ) {
-          console.log("Campos incompletos");
-          return {"status":400 , "respuesta": "Campos incompletos"}
-        }
-        console.log(title)
-        console.log(description)
+        // if (!title || !description || !price || !code || !stock || !category ) {
+        //   console.log("Campos incompletos");
+        //   return {"status":400 , "respuesta": "Campos incompletos"}
+        // }
         const produ = await this.getProducts();
         const newProduct = {
           id: produ.length + 1,

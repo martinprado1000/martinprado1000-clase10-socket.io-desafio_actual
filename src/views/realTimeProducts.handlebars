@@ -1,149 +1,149 @@
-<div class="container">
+<div class="mx-3">
   <h3>Vista real time products</h3>
   <hr />
-  <form
-    name="formProducts"
-    id="formProducts"
-    class="row g-3 needs-validation"
-    novalidate
-    method="POST"
-    action="/realTimeProducts"
-  >
-    <div class="col-md-3">
-      <label for="title" class="form-label">Título del producto</label>
-      <input
-        name="title"
-        type="text"
-        class="form-control"
-        id="title"
-        placeholder="Ingrese un título"
-        required
-      />
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-    </div>
-    <div class="col-md-6">
-      <label for="description" class="form-label">Descripción</label>
-      <input
-        name="description"
-        type="text-area"
-        class="form-control"
-        id="description"
-        placeholder="Ingrese una descripción"
-        required
-      />
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-    </div>
-    <div class="col-md-3">
-      <label for="price" class="form-label">Precio</label>
-      <input
-        name="price"
-        type="text-area"
-        class="form-control"
-        id="price"
-        placeholder="Ingrese el precio"
-        required
-      />
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-    </div>
-    <div class="col-md-4">
-      <label for="code" class="form-label">Codigo</label>
-      <input
-        name="code"
-        type="text"
-        class="form-control"
-        id="code"
-        placeholder="Ingrese el código"
-        required
-      />
-      <div class="invalid-feedback">
-        Please provide a valid city.
-      </div>
-    </div>
-    <div class="col-md-4">
-      <label for="category" class="form-label">Categoria</label>
-      <input
-        name="category"
-        type="text"
-        class="form-control"
-        id="category"
-        placeholder="Ingrese la categoria"
-        required
-      />
-      <div class="invalid-feedback">
-        Please provide a valid city.
-      </div>
-    </div>
-    <div class="col-md-4">
-      <label for="stock" class="form-label">Cantidad</label>
-      <input
-        name="stock"
-        type="text"
-        class="form-control"
-        id="stock"
-        placeholder="Ingrese la cantidad"
-        required
-      />
-      <div class="invalid-feedback">
-        Please provide a valid zip.
-      </div>
-    </div>
-    <div class="col-md-12">
-      <label for="thumbnail" class="form-label">Imagenes</label>
-      <input
-        name="thumbnail"
-        type="text"
-        class="form-control"
-        id="thumbnail"
-        placeholder="Ingrese URL de las imagenes"
-        required
-      />
-      <div class="invalid-feedback">
-        Please provide a valid zip.
-      </div>
-    </div>
-    {{! <div class="col-12">
-      <div class="form-check">
+  <div class="row">
+    <form
+      name="formProducts"
+      id="formProducts"
+      class="col-3 needs-validation"
+      novalidate
+      method="POST"
+      action="/realTimeProducts"
+    >
+      <div class="col-md">
+        <label for="title" class="form-label">Título del producto</label>
         <input
-          class="form-check-input"
-          type="checkbox"
-          value=""
-          id="invalidCheck"
+          name="title"
+          type="text"
+          class="form-control"
+          id="title"
+          placeholder="Ingrese un título"
           required
         />
-        <label class="form-check-label" for="invalidCheck">
-          Agree to terms and conditions
-        </label>
-        <div class="invalid-feedback">
-          You must agree before submitting.
+        <div class="valid-feedback">
+          Looks good!
         </div>
       </div>
-    </div> }}
-    <div class="col-12">
-      <button class="btn btn-primary" type="submit">Enviar</button>
+      <div class="col-md">
+        <label for="description" class="form-label">Descripción</label>
+        <input
+          name="description"
+          type="text-area"
+          class="form-control"
+          id="description"
+          placeholder="Ingrese una descripción"
+          required
+        />
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      <div class="col-md">
+        <label for="price" class="form-label">Precio</label>
+        <input
+          name="price"
+          type="text-area"
+          class="form-control"
+          id="price"
+          placeholder="Ingrese el precio"
+          required
+        />
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      <div class="col-md">
+        <label for="code" class="form-label">Codigo</label>
+        <input
+          name="code"
+          type="text"
+          class="form-control"
+          id="code"
+          placeholder="Ingrese el código"
+          required
+        />
+        <div class="invalid-feedback">
+          Please provide a valid city.
+        </div>
+      </div>
+      <div class="col-md">
+        <label for="category" class="form-label">Categoria</label>
+        <input
+          name="category"
+          type="text"
+          class="form-control"
+          id="category"
+          placeholder="Ingrese la categoria"
+          required
+        />
+        <div class="invalid-feedback">
+          Please provide a valid city.
+        </div>
+      </div>
+      <div class="col-md">
+        <label for="stock" class="form-label">Cantidad</label>
+        <input
+          name="stock"
+          type="text"
+          class="form-control"
+          id="stock"
+          placeholder="Ingrese la cantidad"
+          required
+        />
+        <div class="invalid-feedback">
+          Please provide a valid zip.
+        </div>
+      </div>
+      <div class="col-md">
+        <label for="thumbnail" class="form-label">Imagenes</label>
+        <input
+          name="thumbnail"
+          type="text"
+          class="form-control"
+          id="thumbnail"
+          placeholder="Ingrese URL de las imagenes"
+          required
+        />
+        <div class="invalid-feedback">
+          Please provide a valid zip.
+        </div>
+      </div>
+      <div class="col mt-2">
+        <button class="btn btn-primary" type="submit">Enviar</button>
+      </div>
+    </form>
+    <div class="col-9">
+      <table class="table table-sm table-dark" id="tableProducts">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Titulo</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Imagen</th>
+      <th scope="col">Code</th>
+      <th scope="col">Categoria</th>
+      <th scope="col">Cantidad</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each data}}
+      <tr id="celda">
+        <th scope="row">{{this.id}}</th>
+        <td>{{this.title}}</td>
+        <td>{{this.description}}</td>
+        <td>{{this.price}}</td>
+        <td>{{this.thumbnail}}</td>
+        <td>{{this.code}}</td>
+        <td>{{this.category}}</td>
+        <td>{{this.stock}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
     </div>
-  </form>
+  </div>
 </div>
-
-{{!-- <h1>Vista Web Sockets</h1>
-<h2>{{nombre}}</h2>
-
-{{#if isAdmin}}
-  {{#each persona}} <!-- Si persona existe recorro el arreglo-->
-    <div>
-      <p>{{this.nombre}}</p>
-      <!-- En handlebars el this hace referencia al objeto que estamos recorriendo (persona en este caso)-->
-      <p>{{this.edad}}</p>
-    </div>
-  {{/each}}
-{{else}}
-  <p>Este usuario no es administrador</p>
-{{/if}} --}}
 
 <script src="/socket.io/socket.io.js"></script>
 <!-- LLamamos al servisor io para ejecutarlo aca en el frontend, 

@@ -11,7 +11,8 @@ const ioFn = ((httpServer)=>{
     io.on("connection",(socket)=>{  
       console.log("Nuevo cliente conectado")
       //console.log(socket.id)
-      socket.on("newProduct",((data)=>console.log(data)))
+      socket.on("nuevoProducto",((data)=>console.log(data)))
+      
       
     })
 

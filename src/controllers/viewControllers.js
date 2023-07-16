@@ -26,15 +26,34 @@ const pagesFn = (io) => {
 
   const realTimeProducts = async (req, res) => {
     try {
-      //const product = req.body;
-      //const data = await manager.addProduct(product);
-      //res.status(data.status).render("realTimeProducts.handlebars",data.respuesta);
-      res.render("realTimeProducts.handlebars");
+      // const limitInt = parseInt(req.query.limit);
+      const data = await manager.getProducts();
+      // if (!limitInt) {
+      //   //res.json(data);
+      //   console.log(data);
+        res.render("realTimeProducts.handlebars" , { data });
+      // } else {
+      //   const dataLimit = data.slice(0, limitInt);
+      //   //res.json(dataLimit);
+      //   res.render("realTimeProducts.handlebars", dataLimit);
+      //}
     } catch (e) {
       console.log(e);
       return { Error: "Algo salio mal con la consulta" };
     }
   };
+
+  // const realTimeProducts = async (req, res) => {
+  //   try {
+  //     //const product = req.body;
+  //     //const data = await manager.addProduct(product);
+  //     //res.status(data.status).render("realTimeProducts.handlebars",data.respuesta);
+  //     res.render("realTimeProducts.handlebars");
+  //   } catch (e) {
+  //     console.log(e);
+  //     return { Error: "Algo salio mal con la consulta" };
+  //   }
+  // };
 
   const postRealTimeProducts = async (req, res) => {
     try {
