@@ -45,7 +45,6 @@ socket.on("test", (data) => {
 //     // socket.on: recibimos la data que viene desde el back, y le especificamos el nombre con el que viene ese mensaje (mensajeDesdeBack), esto tiene que conicidir con el nombre del back.
 //     //console.log(data) // Aca imprimo la data que me mando el back con el nombre mensajeDesdeBack
 //     //const product = JSON.parse(data);
-//     console.log("hola")
 //   });
 //   //form.submit();
 //   // const title = document.getElementById("title").value;
