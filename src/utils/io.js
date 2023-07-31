@@ -13,7 +13,6 @@ const ioFn = ((httpServer)=>{
       //console.log(socket.id)
       socket.on("nuevoProducto",((data)=>console.log(data)))
       
-      
     })
 
     return io;

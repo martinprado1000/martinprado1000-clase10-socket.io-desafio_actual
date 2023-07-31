@@ -1,4 +1,7 @@
-<h1>Vista Home, no trabaja con socket.io</h1>
+<div class="mx-3">
+
+<h3>View Home, no trabaja con socket.io</h3>
+<hr>
 
 <table class="table table-sm table-dark" id="tableProducts">
   <thead>
@@ -29,10 +32,15 @@
   </tbody>
 </table>
 
- <script src="/socket.io/socket.io.js"></script> 
-<!--  LLamamos a io para ejecutarlo aca en el frontend -->
-<script src="/js/websockets.js"></script>
-<!-- Aca le puedo pasar nuestro js publico que es donde tenemos configurado nuestro server io -->
+</div>
+
+<!-- LLamamos al servisor io para ejecutarlo aca en el frontend, 
+como esto ejecuta el servidor este ya establece la comunicacion cada vez que se actualiza la paguina -->
+{{!-- <script src="/socket.io/socket.io.js"></script> --}}
+
+<!-- Aca le paso mi js publico -->
+{{!-- <script src="/js/websockets.js"></script> --}}
+
 <!-- bootstrap -->
 <script
   src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

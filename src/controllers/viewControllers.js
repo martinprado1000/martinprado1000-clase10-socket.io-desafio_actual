@@ -11,13 +11,25 @@ const pagesFn = (io) => {
       const data = await manager.getProducts();
       if (!limitInt) {
         //res.json(data);
-        console.log(data);
+        console.log("hola");
         res.render("home.handlebars", { data });
       } else {
         const dataLimit = data.slice(0, limitInt);
         //res.json(dataLimit);
         res.render("home.handlebars", dataLimit);
       }
+    } catch (e) {
+      console.log(e);
+      return { Error: "Algo salio mal con la consulta" };
+    }
+  };
+
+  //get ProductById
+  const homeById = async (req, res) => {
+    try {
+      const pid = parseInt(req.params.pid);
+      const data = await manager.getProductById(pid);
+      res.render("home.handlebars", { data });
     } catch (e) {
       console.log(e);
       return { Error: "Algo salio mal con la consulta" };
@@ -31,7 +43,7 @@ const pagesFn = (io) => {
       // if (!limitInt) {
       //   //res.json(data);
       //   console.log(data);
-        res.render("realTimeProducts.handlebars" , { data });
+      res.render("realTimeProducts.handlebars", { data });
       // } else {
       //   const dataLimit = data.slice(0, limitInt);
       //   //res.json(dataLimit);
@@ -43,103 +55,74 @@ const pagesFn = (io) => {
     }
   };
 
-  // const realTimeProducts = async (req, res) => {
-  //   try {
-  //     //const product = req.body;
-  //     //const data = await manager.addProduct(product);
-  //     //res.status(data.status).render("realTimeProducts.handlebars",data.respuesta);
-  //     res.render("realTimeProducts.handlebars");
-  //   } catch (e) {
-  //     console.log(e);
-  //     return { Error: "Algo salio mal con la consulta" };
-  //   }
-  // };
-
-  const postRealTimeProducts = async (req, res) => {
-    try {
-      //console.log(req.body)
-      const product = req.body;
-      //product.preventDefault();
-      const data = await manager.addProduct(product);
-      res.render("realTimeProducts.handlebars");
-      //res.send("hola");
-    } catch (e) {
-      console.log(e);
-      return { Error: "Algo salio mal con la consulta" };
-    }
-  };
-
-  //-----------------------------------------------------------------------------------------
-  //get Products
-  const products = async (req, res) => {
-    try {
-      const limitInt = parseInt(req.query.limit);
-      //console.log(limitInt);
-      const data = await manager.getProducts();
-      if (!limitInt)
-        //res.json(data);
-        res.render("home.handlebars", data);
-      else {
-        const dataLimit = data.slice(0, limitInt);
-        //res.json(dataLimit);
-        res.render("home.handlebars", dataLimit);
-      }
-    } catch (e) {
-      console.log(e);
-      return { Error: "Algo salio mal con la consulta" };
-    }
-  };
-
-  //get ProductById
-  const productId = async (req, res) => {
+  const realTimeProductById = async (req, res) => {
     try {
       const pid = parseInt(req.params.pid);
       const data = await manager.getProductById(pid);
-      res.status(data.status).json(data.respuesta);
+      console.log(data.respuesta)
+      const product = data.respuesta
+      res.json(product);
     } catch (e) {
       console.log(e);
       return { Error: "Algo salio mal con la consulta" };
     }
   };
 
-  //post Product
-  const productAdd = async (req, res) => {
+  const postRealTimeProducts = async (req, res) => {
     try {
       const product = req.body;
       const data = await manager.addProduct(product);
-      res.status(data.status).send(data.respuesta);
+      res.json(data);
+      // if ( data.status == 400 ) {
+      //   console.log(data.status)
+      //   console.log("1")
+      //   res.render("error.handlebars", data);
+      // } else {
+      //   console.log(data.status)
+      //   console.log("2")
+      //   res.json(data);
+      // }
     } catch (e) {
       console.log(e);
       return { Error: "Algo salio mal con la consulta" };
     }
   };
 
-  //put Product
-  const productPut = async (req, res) => {
+  const deleteRealTimeProducts = async (req, res) => {
     try {
+      const pid = parseInt(req.params.pid);
+      const data = await manager.deleteProduct(pid);
+      res.json(data);
+    } catch (e) {
+      console.log(e);
+      return { Error: "Algo salio mal con la consulta" };
+    }
+  };
+  
+  const updateRealTimeProducts = async (req, res) => {
+    try{
       const pid = req.params.pid;
+      console.log(pid)
       const product = req.body;
-      const data = await manager.updateProduct(pid, product);
-      res.status(data.status).send(data.respuesta);
-    } catch (e) {
+      console.log(product)
+      const data = await manager.updateProduct(pid,product);
+      //res.status(data.status).send(data.respuesta);
+      res.json(data);
+    } catch(e) {
       console.log(e);
-      return { Error: "Algo salio mal con la consulta" };
+      return { "Error" : "Algo salio mal con la consulta"}
     }
-  };
+  }
 
-  //delete Product
-  const productDelete = async (req, res) => {
-    try {
-      const product = req.params.pid;
-      const data = await manager.deleteProduct(product);
-      res.status(data.status).send(data.respuesta);
-    } catch (e) {
-      console.log(e);
-      return { Error: "Algo salio mal con la consulta" };
-    }
+  return {
+    home,
+    homeById,
+    realTimeProducts,
+    realTimeProductById,
+    postRealTimeProducts,
+    updateRealTimeProducts,
+    deleteRealTimeProducts
   };
-  return { home, realTimeProducts, postRealTimeProducts }
 };
 
-module.exports = pagesFn
-
+module.exports = pagesFn;

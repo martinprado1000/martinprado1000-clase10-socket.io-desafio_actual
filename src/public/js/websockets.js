@@ -1,49 +1,32 @@
-const socket = io(); // Con esto le indicamos que servidor io vamos a usar,
-//aca se establece la comun icacion entre los servidores del front y el back, llamado handcheck
-console.log(socket); // Esto me muestra en el front cuando se establecion la comunicacion socket
+const socket = io();
+console.log(socket);
 
-// socket.emit("mensajeDesdeFront", "Esto es la dato que estoy enviando desde el front") // io.emit: es para emitr el mensaje que a ir al back
-// // El primer parametro es el nombre del mensaje que tiene que coicidir con el del back, y luego la data que le voy a enviar
+// Obtengo los id de cada elemento
+const submitForm = document.getElementById("formProducts");
+const btnSubmit = document.getElementById("submit");
+const btnUpdate = document.getElementById("update");
+const btnCancelUpdate = document.getElementById("cancelUpdate");
+const idInput = document.getElementById("id");
+const titleInput = document.getElementById("title");
+const descriptionInput = document.getElementById("description");
+const priceInput = document.getElementById("price");
+const thumbnailInput = document.getElementById("thumbnail");
+const codeInput = document.getElementById("code");
+const stockInput = document.getElementById("stock");
+const categoryInput = document.getElementById("category");
 
-socket.on("nuevoProducto", (data) => {
-  // socket.on: recibimos la data que viene desde el back, y le especificamos el nombre con el que viene ese mensaje (mensajeDesdeBack), esto tiene que conicidir con el nombre del back.
-  console.log(data) // Aca imprimo la data que me mando el back con el nombre mensajeDesdeBack
-  //const product = JSON.parse(data);
-  //console.log(product)
-  // const table = document.getElementById('tableProducts');
-  // const newRow = table.insertRow();
-  // const id = newRow.insertCell();
-  // const title = newRow.insertCell();
-  // const description = newRow.insertCell();
-  // const price = newRow.insertCell();
-  // const thumbnail = newRow.insertCell()
-  // const code = newRow.insertCell();
-  // const stock = newRow.insertCell();
-  // const category = newRow.insertCell();
-  // id.textContent = product.id;
-  // title.textContent = product.title;
-  // description.textContent = product.description;
-  // price.textContent = product.price;
-  // thumbnail.textContent = product.thumbnail;
-  // code.textContent = product.code;
-  // stock.textContent = product.stock;
-  // category.textContent = product.category;
-});
-
-//---------------------------
-const form = document.getElementById("formProducts");
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
-  //form.submit();
-  console.log("Holaaaaaaaaaaa")
-  const title = document.getElementById("title").value;
-  const description = document.getElementById("description").value;
-  const price = document.getElementById("price").value;
-  const thumbnail = document.getElementById("thumbnail").value;
-  const code = document.getElementById("code").value;
-  const stock = document.getElementById("stock").value;
-  const category = document.getElementById("category").value;
-  const newProduct = {
+// Obtengo los datos del formulario
+const obtenerDatos = () => {
+  const id = idInput.value;
+  const title = titleInput.value;
+  const description = descriptionInput.value;
+  const price = priceInput.value;
+  const thumbnail = thumbnailInput.value;
+  const code = codeInput.value;
+  const stock = stockInput.value;
+  const category = categoryInput.value;
+  const product = {
+    id,
     title,
     description,
     price,
@@ -52,8 +35,158 @@ form.addEventListener("submit", function (e) {
     stock,
     category,
   };
-  console.log(newProduct)
-  socket.emit("nuevoProducto", JSON.stringify(newProduct));
-  form.submit();
+  return product;
+};
+
+btnCancelUpdate.addEventListener("click", (e) => {
+  btnSubmit.disabled = false;
+  btnUpdate.disabled = true;
+  btnCancelUpdate.disabled = true;
+  titleInput.value = "";
+  descriptionInput.value = "";
+  codeInput.value = "";
+  categoryInput.value = "";
+  stockInput.value = "";
+  thumbnailInput.value = "";
 });
-//---------------------------
+
+const buttonFn = () => {
+  // ---- Editar producto --------
+  const editBtn = document.getElementsByClassName("edit");
+  for (var i = 0; i < editBtn.length; i++) {
+    editBtn[i].onclick = async function () {
+      var editProduct = this.value;
+      btnSubmit.disabled = true;
+      btnUpdate.disabled = false;
+      btnCancelUpdate.disabled = false;
+      console.log("Editar producto: " + editProduct);
+      await fetch(`/realTimeProducts/${editProduct}`, {
+        headers: { "Content-type": "application/json;charset=UTF-8" },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          //console.log(data.title);
+          idInput.value = data.id;
+          titleInput.value = data.title;
+          descriptionInput.value = data.description;
+          codeInput.value = data.code;
+          categoryInput.value = data.category;
+          stockInput.value = data.stock;
+          thumbnailInput.value = data.thumbnail;
+        });
+    };
+  }
+  // ---- Eliminar producto ----------
+  const deleteBtn = document.getElementsByClassName("delete");
+  for (var i = 0; i < deleteBtn.length; i++) {
+    deleteBtn[i].onclick = async function () {
+      var pid = this.value;
+      const resDelete = await fetch(`/realTimeProducts/${pid}`, {
+        method: "DELETE",
+        headers: { "Content-type": "application/json;charset=UTF-8" },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status == 204) {
+            alert("Producto eliminado correctamente");
+            window.location.href = "/realTimeProducts";
+          } else {
+            alert("Producto inexistente");
+          }
+        })
+        .catch((err) => console.log(err));
+    };
+  }
+};
+buttonFn();
+
+// Inserto el nuevo producto
+socket.on("nuevoProducto", (data) => {
+  const product = JSON.parse(data);
+  const table = document.getElementById("tableProducts");
+  const newRow = table.insertRow();
+  const id = newRow.insertCell();
+  const title = newRow.insertCell();
+  const description = newRow.insertCell();
+  const price = newRow.insertCell();
+  const thumbnail = newRow.insertCell();
+  const code = newRow.insertCell();
+  const stock = newRow.insertCell();
+  const category = newRow.insertCell();
+  const cellEdit = newRow.insertCell();
+  const cellDelete = newRow.insertCell();
+  id.textContent = product.id;
+  title.textContent = product.title;
+  description.textContent = product.description;
+  price.textContent = product.price;
+  thumbnail.textContent = product.thumbnail;
+  code.textContent = product.code;
+  stock.textContent = product.stock;
+  category.textContent = product.category;
+  const btnEdit = document.createElement("button");
+  btnEdit.innerText = "Editar";
+  btnEdit.value = product.id;
+  btnEdit.classList.add("edit", "btn", "btn-primary", "btn-sm");
+  cellEdit.appendChild(btnEdit);
+  const btnDelete = document.createElement("button");
+  btnDelete.innerText = "Eliminar";
+  btnDelete.value = product.id;
+  btnDelete.classList.add("delete", "btn", "btn-danger", "btn-sm");
+  cellDelete.appendChild(btnDelete);
+  buttonFn();
+});
+
+// Envio nuevo producto al backend
+submitForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const newProduct = obtenerDatos();
+  console.log(newProduct);
+
+  fetch("/realTimeProducts", {
+    method: "POST",
+    headers: { "Content-type": "application/json;charset=UTF-8" },
+    body: JSON.stringify(newProduct),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.status == 200 || data.status == 201) {
+        alert("Producto agregado correctamente");
+        titleInput.value = "";
+        descriptionInput.value = "";
+        codeInput.value = "";
+        categoryInput.value = "";
+        stockInput.value = "";
+        thumbnailInput.value = "";
+      } else {
+        alert("Campos incompletos");
+      }
+    })
+    .catch((err) => console.log(err));
+});
+
+btnUpdate.addEventListener("click", (e) => {
+  e.preventDefault();
+  const newProduct = obtenerDatos();
+  console.log(newProduct.id);
+  fetch(`/realTimeProducts/${newProduct.id}` , {
+    method: "PUT",
+    headers: { "Content-type": "application/json;charset=UTF-8" },
+    body: JSON.stringify(newProduct),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.status == 200 || data.status == 201) {
+        alert("Producto actualizado correctamente");
+        titleInput.value = "";
+        descriptionInput.value = "";
+        codeInput.value = "";
+        categoryInput.value = "";
+        stockInput.value = "";
+        thumbnailInput.value = "";
+        window.location.href = "/realTimeProducts";
+      } else {
+        alert("Campos incompletos");
+      }
+    })
+    .catch((err) => console.log(err));
+});
